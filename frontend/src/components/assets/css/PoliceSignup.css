@@ -1,0 +1,25 @@
+.imgC {
+  background-image: url('https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg');
+  height: 500px;
+  background-position: center;
+  width: 400px;
+  background-size: cover;
+}
+
+.login-wrap{
+  width: 400px;
+}
+
+.custom-form-control {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.custom-form-control::placeholder {
+  color: #808080;
+  font-size: smaller;
+}

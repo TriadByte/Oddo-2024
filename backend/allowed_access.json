@@ -1,0 +1,14 @@
+{
+    "allowed_domains": [
+        "http://localhostxxx"
+    ],
+    "allowed_ips": [
+        "123.45.67.89"
+    ],
+    "description": "This file contains the list of allowed domains and IPs for the backend server."
+    ,
+    "blocked_ips": [""],
+    "blocked_domains": [
+        "http://evil.com"
+    ]
+}

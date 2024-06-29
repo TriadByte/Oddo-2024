@@ -1,0 +1,72 @@
+/* Dash.css */
+
+.container {
+  margin-top: 20px;
+}
+
+.crime-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.crime-item {
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.expanded-crime-details {
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.cancel-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: #777;
+}
+
+.cancel-btn:hover {
+  color: #333;
+}
+
+.crime-map {
+  height: 300px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .col-lg-3 {
+    display: none; /* Hide crime list on smaller screens */
+  }
+
+  .col-lg-9 {
+    width: 100%; /* Ensure expanded details take full width */
+  }
+
+  .expanded-crime-details {
+    padding: 10px;
+  }
+
+  .cancel-btn {
+    top: 5px;
+    right: 5px;
+  }
+
+  .crime-map {
+    height: 200px;
+  }
+}
+.expanded-crime-details {
+  margin-top: 10px; /* Adjust as needed */
+  border: 1px solid #ccc; /* Example border style */
+  padding: 10px; /* Example padding */
+}
