@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Sign In TextView -->
+
+    <!-- Email EditText -->
+
+    <!-- Password EditText -->
+
+    <ScrollView
+        android:id="@+id/scrollView5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/text_view_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/scrollView5"
+        android:layout_alignTop="@+id/scrollView5"
+        android:layout_alignEnd="@+id/scrollView5"
+        android:layout_marginTop="164dp"
+        android:layout_marginBottom="24dp"
+        android:text="Sign In"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edit_text_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_sign_in"
+        android:layout_alignStart="@+id/scrollView5"
+        android:layout_alignEnd="@+id/scrollView5"
+        android:layout_marginTop="23dp"
+        android:hint="Username / Email / Phone Number"
+        android:imeOptions="actionNext"
+        android:inputType="textAutoComplete" />
+
+    <EditText
+        android:id="@+id/edit_text_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_text_email"
+        android:layout_alignStart="@+id/scrollView5"
+        android:layout_alignEnd="@+id/scrollView5"
+        android:layout_marginTop="16dp"
+        android:hint="Password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword" />
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_text_password"
+        android:layout_alignStart="@+id/scrollView5"
+        android:layout_alignEnd="@+id/scrollView5"
+        android:layout_marginTop="16dp"
+        android:text="Login" />
+
+</RelativeLayout>

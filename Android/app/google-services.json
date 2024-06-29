@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "992184868284",
+    "firebase_url": "https://crimesnap-b7a5c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "crimesnap-b7a5c",
+    "storage_bucket": "crimesnap-b7a5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992184868284:android:de147f57e1d8717eea9fb9",
+        "android_client_info": {
+          "package_name": "com.crimesnap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992184868284-3lq4bueaghrndf2vgg6i529sk2aloqqu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1f_qGkRxMEmRF7yeC55dqyouHuLC_slM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992184868284-3lq4bueaghrndf2vgg6i529sk2aloqqu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "992184868284-7k0ul408ffe6jkjuo2v3iupf48fq9cbk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.crimesnap.crimesnap"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+
