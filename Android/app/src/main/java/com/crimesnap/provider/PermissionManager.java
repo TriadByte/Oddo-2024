@@ -47,7 +47,7 @@ public class PermissionManager {
             android.Manifest.permission.INTERNET,
     };
 
-    public static void checkAndRequestPermissions(ReportCrime activity) {
+    public static void checkAndRequestPermissions(Activity activity) {
         List<String> foregroundPermissionsNeeded = new ArrayList<>();
         List<String> backgroundPermissionsNeeded = new ArrayList<>();
 

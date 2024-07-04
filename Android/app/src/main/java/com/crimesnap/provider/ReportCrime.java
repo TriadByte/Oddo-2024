@@ -1,4 +1,4 @@
-package com.crimesnap.pages;
+package com.crimesnap.provider;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -42,6 +42,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+//import com.google.auth.oauth2.GoogleCredentials;
+//import com.google.cloud.firestore.Firestore;
+
 public class ReportCrime extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -60,8 +63,9 @@ public class ReportCrime extends AppCompatActivity {
         return selectedImageCount;
     }
 
-    public void setSelectedImageCount(int selectedImageCount) {
+    public int setSelectedImageCount(int selectedImageCount) {
         this.selectedImageCount = selectedImageCount;
+        return selectedImageCount;
     }
 
     private int selectedImageCount;
@@ -71,6 +75,8 @@ public class ReportCrime extends AppCompatActivity {
     // Firebase instances
     private FirebaseStorage storage;
     private FirebaseFirestore firestore;
+
+
 
     // Activity result launcher for capturing images
     private final ActivityResultLauncher<Intent> imageCaptureLauncher = registerForActivityResult(
@@ -89,7 +95,8 @@ public class ReportCrime extends AppCompatActivity {
             });
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_report_crime);
@@ -99,6 +106,8 @@ public class ReportCrime extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+
 
         // Initialize Firebase normally for Android:
         FirebaseApp.initializeApp(this); // 'this' refers to the current context
@@ -110,6 +119,7 @@ public class ReportCrime extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
+
         SimpleCallback permissionDeniedCallback = () -> Log.d("Permission", "Permission Denied");
 
         LocationProvider locationProvider = new LocationProvider(
@@ -117,15 +127,34 @@ public class ReportCrime extends AppCompatActivity {
                 LocationProvider.PRIORITY_HIGH,
                 permissionDeniedCallback,
                 location -> {
+
                     if (location != null) {
                         crimeLatitude = location.getLatitude();
                         crimeLongitude = location.getLongitude();
                         Log.d("Location", "Location: " + crimeLatitude + ", " + crimeLongitude);
                     }
+//
                 }
+
+//                SimpleCallback() {
+//                    @Override
+//                    public void onCallback() {
+//                        Log.d("Permission", "Permission Denied");
+//                    }
+//                },
+//                new OnSuccessListener<Location>() {
+//                    @Override
+//                    public void onSuccess(Location location) {
+//                        if (location != null) {
+//                            Log.d("Location", "onCreate: Location " + location.getLatitude() + " and " + location.getLongitude());
+//                            // Handle location update logic here
+//                        }
+//                    }
+//                }
         );
 
         locationProvider.getLocation();
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -152,10 +181,10 @@ public class ReportCrime extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCrimeType.setAdapter(adapter);
 
-        // Capture or upload image button click listener
+//        Capture or upload image button click listner
         btnCaptureImage.setOnClickListener(view -> openImageChooser());
 
-        // Submit button click listener
+//        Submit button click listener
         btnSubmit.setOnClickListener(view -> submitCrimeReport());
     }
 
@@ -173,13 +202,12 @@ public class ReportCrime extends AppCompatActivity {
         }
     }
 
+
     private void handleImageSelection(Uri selectedImageUri) {
         if (selectedImageCount < 3) {
             String imagePath = selectedImageUri.toString();
             addImage(imagePath);
             selectedImageCount++;
-            Log.d("Image Selection", "Selected image: " + imagePath);
-            Log.d("Image Selection", "Total selected images: " + selectedImageCount);
         } else {
             Toast.makeText(this, "Maximum 3 images allowed", Toast.LENGTH_SHORT).show();
         }
@@ -193,18 +221,17 @@ public class ReportCrime extends AppCompatActivity {
             // For demonstration, let's use a placeholder path
             String imagePath = "file:///path/to/image.jpg";
             addImage(imagePath);
-            Log.d("Camera Image", "Captured image path: " + imagePath);
         }
     }
 
     private void addImage(String imagePath) {
+        setSelectedImageCount(1);
         if (imagePaths.size() < 3) {
             imagePaths.add(imagePath);
             imageAdapter.notifyDataSetChanged();
-            Log.d("Add Image", "Image added: " + imagePath);
-            Log.d("Add Image", "Total images: " + imagePaths.size());
-        } else {
-            Toast.makeText(this, "Maximum 3 images already selected", Toast.LENGTH_SHORT).show();
+//            int count = getSelectedImageCount();
+//            count++;
+//            Toast.makeText(MainActivity.this, count, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -213,8 +240,6 @@ public class ReportCrime extends AppCompatActivity {
         imageAdapter.notifyDataSetChanged();
         selectedImageCount--; // Decrement the selectedImageCount
         updateImageSelectionToast();
-        Log.d("Delete Image", "Image at position " + position + " deleted");
-        Log.d("Delete Image", "Total images: " + imagePaths.size());
     }
 
     private void updateImageSelectionToast() {
@@ -222,6 +247,7 @@ public class ReportCrime extends AppCompatActivity {
             Toast.makeText(ReportCrime.this, "Maximum 3 images already selected", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void submitCrimeReport() {
         String crimeType = spinnerCrimeType.getSelectedItem().toString();
@@ -232,15 +258,20 @@ public class ReportCrime extends AppCompatActivity {
             return;
         }
 
-        Log.d("Submit Crime Report", "Image paths before upload: " + imagePaths.toString());
+        // Log the crime report with images
+//        logCrimeReport(crimeType, crimeName, imagePaths, crimeLongitude, crimeLatitude);
 
+        // Upload images and then log the crime report
         uploadImagesAndLogReport(crimeType, crimeName);
+
+//        Toast.makeText(MainActivity.this,"Please", Toast.LENGTH_SHORT).show();
+
+//         Clear the form
         clearForm();
     }
 
     private void uploadImagesAndLogReport(String crimeType, String crimeName) {
         List<String> uploadedImageUrls = new ArrayList<>();
-        int imagesSize = imagePaths.size();
         for (String imagePath : imagePaths) {
             Uri fileUri = Uri.parse(imagePath);
             String fileName = fileUri.getLastPathSegment();
@@ -250,8 +281,8 @@ public class ReportCrime extends AppCompatActivity {
                     .addOnSuccessListener(taskSnapshot -> storageRef.getDownloadUrl()
                             .addOnSuccessListener(uri -> {
                                 uploadedImageUrls.add(uri.toString());
-                                Log.d("Image Upload", "Uploaded image URL: " + uri.toString());
-                                if (uploadedImageUrls.size() == imagesSize) {
+                                if (uploadedImageUrls.size() == imagePaths.size()) {
+                                    // All images uploaded, log the report
                                     logCrimeReport(crimeType, crimeName, uploadedImageUrls, crimeLongitude, crimeLatitude);
                                 }
                             }))
@@ -269,11 +300,10 @@ public class ReportCrime extends AppCompatActivity {
             crimeReport.put("crimeDesc", crimeName);
             crimeReport.put("crimeLong", longitude);
             crimeReport.put("crimeLat", latitude);
-            crimeReport.put("anonymous", checkBoxAnonymous.isChecked());
-
+            crimeReport.put("anonymous",  checkBoxAnonymous.isChecked()); // Assuming the report is anonymous
             Random random = new Random();
-            int userId = random.nextInt(100000);
-            crimeReport.put("userId", userId);
+            int userId = random.nextInt(100000); // Generates a random user ID
+            crimeReport.put("userId", userId); // Assuming a placeholder user ID
 
             JSONArray imagesArray = new JSONArray();
             for (String imageUrl : imageUrls) {
@@ -285,17 +315,7 @@ public class ReportCrime extends AppCompatActivity {
             Map<String, Object> crimeReportMap = new HashMap<>();
             crimeReport.keys().forEachRemaining(key -> {
                 try {
-                    Object value = crimeReport.get(key);
-                    if (value instanceof JSONArray) {
-                        List<String> list = new ArrayList<>();
-                        JSONArray jsonArray = (JSONArray) value;
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            list.add(jsonArray.getString(i));
-                        }
-                        crimeReportMap.put(key, list);
-                    } else {
-                        crimeReportMap.put(key, value);
-                    }
+                    crimeReportMap.put(key, crimeReport.get(key));
                 } catch (JSONException e) {
                     Log.e("Crime Report JSON", "Error creating map from JSON object", e);
                 }
@@ -319,6 +339,7 @@ public class ReportCrime extends AppCompatActivity {
     }
 
 
+
     private void clearForm() {
         // Clear form fields
         etCrimeName.getText().clear();
@@ -326,6 +347,5 @@ public class ReportCrime extends AppCompatActivity {
         imageAdapter.notifyDataSetChanged();
         // Reset image count
         selectedImageCount = 0;
-        Log.d("Clear Form", "Form cleared");
     }
 }

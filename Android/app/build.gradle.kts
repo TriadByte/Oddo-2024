@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-//    id("com.android.application")
     id("com.google.gms.google-services")
 }
 
@@ -37,9 +36,6 @@ android {
 }
 
 dependencies {
-
-
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -50,39 +46,29 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-//
-//    implementation ("com.github.bumptech.glide:glide:4.12.0")
-//    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
-
 
     implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
-//    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
 
-//    implementation platform("com.google.firebase:firebase-bom:33.1.1")
-    implementation ("com.google.firebase:firebase-storage")
-    implementation ("com.google.firebase:firebase-firestore")
-    implementation ("com.google.firebase:firebase-analytics")
-    implementation ("com.google.firebase:firebase-core")
+    // If needed, add firebase-core with a specific version
+    // implementation("com.google.firebase:firebase-core:20.1.0")
 
-    implementation("androidx.credentials:credentials:<latest version>")
-    implementation("androidx.credentials:credentials-play-services-auth:<latest version>")
-    implementation("com.google.android.libraries.identity.googleid:googleid:<latest version>")
+    implementation("androidx.credentials:credentials:1.0.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.0.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.0.0")
 
-
-    implementation ("org.json:json:20210307")
-
+    implementation("org.json:json:20210307")
 
     val camerax_version = "1.3.3"
 
-    implementation ("io.socket:socket.io-client:2.0.0")
-    implementation("androidx.camera:camera-core:${camerax_version}")
-    implementation ("androidx.camera:camera-lifecycle:${camerax_version}")
-    implementation ("androidx.camera:camera-camera2:${camerax_version}")
-    implementation ("com.google.android.gms:play-services-maps:18.2.0")
-    implementation ("com.google.android.gms:play-services-location:21.2.0")
+    implementation("io.socket:socket.io-client:2.0.0")
+    implementation("androidx.camera:camera-core:$camerax_version")
+    implementation("androidx.camera:camera-lifecycle:$camerax_version")
+    implementation("androidx.camera:camera-camera2:$camerax_version")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.android.gms:play-services-location:21.2.0")
 
-//    implementation ("com.google.firebase:firebase-firestore:24.1.0")
-//    implementation ("com.google.firebase:firebase-storage:23.0.0")
-
-    implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation("com.squareup.picasso:picasso:2.71828")
 }

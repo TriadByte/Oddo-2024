@@ -1,5 +1,6 @@
 package com.crimesnap;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.crimesnap.pages.ReportCrime;
 import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
                 // Handle button1 click
                 Toast.makeText(MainActivity.this, "Report Crime button clicked", Toast.LENGTH_SHORT).show();
                 // Add your logic for handling this button's action
+                Intent intent = new Intent(MainActivity.this, ReportCrime.class);
+
+                startActivity(intent);
             }
         });
 
@@ -39,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
                 // Handle button2 click
                 Toast.makeText(MainActivity.this, "View Reported Crime button clicked", Toast.LENGTH_SHORT).show();
                 // Add your logic for handling this button's action
+
+
+
             }
         });
 
